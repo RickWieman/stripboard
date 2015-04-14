@@ -4,6 +4,8 @@
 		<title>Flight Progress Strips</title>
 		<script type="text/javascript" src="vendor/jquery-2.1.3.min.js"></script>
 		<script type="text/javascript" src="vendor/jquery.gridster.min.js"></script>
+		<script type="text/javascript" src="vendor/papaparse.min.js"></script>
+		<script type="text/javascript" src="js/data.js"></script>
 		<link rel="stylesheet" type="text/css" href="vendor/jquery.gridster.min.css">
 		<link rel="stylesheet" type="text/css" href="css/board.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_inbound.css">
@@ -12,91 +14,23 @@
 	<body>
 		<h1>Flight Progress Strips</h1>
 
+		<p><a href='javascript:updateData()'>Update</a></p>
+
 		<div class="gridster">
-			<ul>
-				<li data-row="1" data-col="1" data-sizex="2" data-sizey="1" class="inbound">
-					<div class="column col1">
-						<!-- intentionally left blank -->
-					</div>
-					<div class="column col2">
-						<div class="gate">GATE</div>
-						<div class="eobt">1805</div>
-					</div>
-					<div class="column col3">
-						<div class="aircraft">B738</div><div class="callsign">KLM50C</div><div class="runway"><span>27</span></div>
-						<div class="dep_airport">EDDM</div><div class="arr_airport">EHAM</div>
-					</div>
-					<div class="column col4">
-						<div class="route">NORKU</div>
-						<div class="sq_mode">C</div><div class="sq_id">SSR</div>
-					</div>
-				</li>
-
-				<li data-row="1" data-col="5" data-sizex="2" data-sizey="1" class="outbound">
-					<div class="column col1">
-						<div class="gate">GATE</div>
-						<div class="eobt">1800</div>
-					</div>
-					<div class="column col2">
-						<div class="aircraft">RJ85</div><div class="callsign">BCY98K</div><div class="runway"><span>24</span></div>
-						<div class="dep_airport">EHAM</div><div class="arr_airport">EGLC</div>
-					</div>
-					<div class="column col3">
-						<div class="rfl">RFL</div><div class="sid">VAL1S</div>
-						<div class="sq_mode">C</div><div class="sq_id">SSR</div>
-					</div>
-					<div class="column col4">
-						<div class="route">GORLO LOGAN</div>
-					</div>
-				</li>
-				<li data-row="2" data-col="5" data-sizex="2" data-sizey="1" class="outbound">
-					<div class="column col1">
-						<div class="gate">GATE</div>
-						<div class="eobt">1805</div>
-					</div>
-					<div class="column col2">
-						<div class="aircraft">B737</div><div class="callsign">SAS828</div><div class="runway"><span>24</span></div>
-						<div class="dep_airport">EHAM</div><div class="arr_airport">EGLC</div>
-					</div>
-					<div class="column col3">
-						<div class="rfl">RFL</div><div class="sid">VAL1S</div>
-						<div class="sq_mode">C</div><div class="sq_id">SSR</div>
-					</div>
-					<div class="column col4">
-						<div class="route">ANDIK TUSKA BAK</div>
-					</div>
-				</li>
-				<li data-row="3" data-col="5" data-sizex="2" data-sizey="1" class="outbound">
-					<div class="column col1">
-						<div class="gate">GATE</div>
-						<div class="eobt">1805</div>
-					</div>
-					<div class="column col2">
-						<div class="aircraft">A320</div><div class="callsign">FIN846Q</div><div class="runway"><span>24</span></div>
-						<div class="dep_airport">EHAM</div><div class="arr_airport">EGLC</div>
-					</div>
-					<div class="column col3">
-						<div class="rfl">RFL</div><div class="sid">AND1S</div>
-						<div class="sq_mode">C</div><div class="sq_id">SSR</div>
-					</div>
-					<div class="column col4">
-						<div class="route">ANDIK JUIST DOSUR</div>
-					</div>
-				</li>
-
-			</ul>
+			<ul></ul>
 		</div>
 
 		<script type="text/javascript" id="code">
 		var gridster;
 
 		$(function(){
-
 			gridster = $(".gridster > ul").gridster({
 				widget_margins: [5, 5],
 				widget_base_dimensions: [300, 80]
 			}).data('gridster');
 		});
+
+		updateData();
 		</script>
 	</body>
 </html>
