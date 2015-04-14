@@ -57,7 +57,7 @@ function createStripOutbound(data) {
 
 // Updates the data by using a CSV parser on the VATSIM data
 function updateData() {
-	Papa.parse('vatsim-data.txt', {
+	Papa.parse('/data/vatsim-data.txt', {
 		download: true,
 		delimiter: ':',
 		comments: ';',
