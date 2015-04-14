@@ -1,0 +1,116 @@
+.gridster li.outbound {
+	border: 1px blue solid;
+}
+
+.gridster li.outbound div.column {
+	display: inline-block;
+	position: relative;
+	left: 0;
+	top: 0;
+	text-align: center;
+	height: 80px;
+}
+
+	.gridster li.outbound div.column div {
+		height: 30px;
+		line-height: 30px;
+		position: absolute;
+	}
+
+.gridster li.outbound div.col1 {
+	width: 100px;
+}
+
+	.gridster li.outbound div.gate {
+		top: 0;
+		width: 100px;
+	}
+	.gridster li.outbound div.eobt {
+		bottom: 0;
+		width: 100px;
+		font-weight: bold;
+	}
+
+.gridster li.outbound div.col2 {
+	border-left: 1px solid #000;
+	border-right: 1px solid #000;
+	width: 200px;
+}
+
+	.gridster li.outbound div.aircraft {
+		top: 0;
+		width: 50px;
+	}
+
+	.gridster li.outbound div.callsign {
+		left: 50px;
+		width: 100px;
+		border-color: #000;
+		border-width: 0px 1px 1px 1px;
+		border-style: solid;
+		font-weight: bold;
+		font-size: 1.3em;
+	}
+
+	.gridster li.outbound div.runway {
+		right: 0;
+		width: 50px;
+	}
+
+	.gridster li.outbound div.runway span {
+		display: inline-block;
+		width: 30px;
+		height: 22px;
+		line-height: 22px;
+		background-color: #000;
+		color: #fff;
+	}
+
+	.gridster li.outbound div.dep_airport {
+		bottom: 0;
+		width: 60px;
+	}
+
+	.gridster li.outbound div.arr_airport {
+		bottom: 0;
+		right: 0;
+		width: 60px;
+	}
+
+.gridster li.outbound div.col3 {
+	width: 100px;
+}
+
+	.gridster li.outbound div.rfl {
+		left: 0;
+		width: 50px;
+	}
+
+	.gridster li.outbound div.sid {
+		right: 0;
+		width: 50px;
+		font-weight: bold;
+	}
+
+	.gridster li.outbound div.sq_mode {
+		bottom: 0;
+		width: 40px;
+		text-align: right;
+	}
+	.gridster li.outbound div.sq_id {
+		bottom: 0;
+		right: 0;
+		width: 50px;
+		text-align: left;
+	}
+
+.gridster li.outbound div.col4 {
+	border-left: 1px solid #000;
+	width: 175px;
+}
+	.gridster li.outbound div.route {
+		top: 0;
+		width: 194px;
+		text-align: left;
+		padding: 0px 5px 0px 5px;
+	}
