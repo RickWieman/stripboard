@@ -3,7 +3,7 @@ function createStrip(flight) {
 	if(flight.origin == AIRPORT) {
 		createStripOutbound(flight);
 	}
-	else if(flight.destination == AIRPORT) {
+	else if(flight.destination == AIRPORT && flight.dtg < RANGE) {
 		createStripInbound(flight);
 	}
 
@@ -27,7 +27,12 @@ function updateStrip(flight) {
 	else if(flight.destination == AIRPORT) {
 		$("#" + flight.callsign + " .eobt").html(flight.eta);
 
-		route = flight.route.split(' ').pop();
+		var routeArray = flight.route.split(' ');
+		route = routeArray.pop();
+
+		while($.inArray(route,SKIP_ROUTES)) {
+			route = routeArray.pop();
+		}
 	}
 
 	$("#" + flight.callsign + " .aircraft").html(flight.aircraft);
@@ -40,7 +45,12 @@ function updateStrip(flight) {
 
 // Creates a strip for an inbound flight
 function createStripInbound(flight) {
-	var route = flight.route.split(' ').pop();
+	var routeArray = flight.route.split(' ');
+	var route = routeArray.pop();
+
+	while($.inArray(route,SKIP_ROUTES) > -1) {
+		route = routeArray.pop();
+	}
 
 	var strip = '<li id="'+flight.callsign+'" class="inbound">' +
 		'<div class="column col1"><textarea></textarea></div>' + 

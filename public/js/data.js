@@ -1,11 +1,6 @@
 // This file handles regular data updates from VATSIM.
 // It provides the data as flight objects for the strip handler.
 
-// Fill in your airport data here
-var AIRPORT = 'EHAM'; // ICAO
-var AIRPORT_LAT = 52.3081;
-var AIRPORT_LON = 4.7642;
-
 // Converts a number into radians
 Number.prototype.toRad = function() {
 	return this * Math.PI / 180;
@@ -26,23 +21,7 @@ function parseData(data, file) {
 	});
 
 	$.each(results, function(id, data) {
-		var flight = {
-			callsign: data[0],
-			lat: parseFloat(data[5]),
-			lon: parseFloat(data[6]),
-			alt: data[7],
-			groundspeed: data[8],
-			aircraft: data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2],
-			origin: data[11],
-			rfl: data[12],
-			destination: data[13],
-			squawk: data[17],
-			route: data[30],
-			dtg: null,
-			eta: null
-		};
-		flight.dtg = calculateRemainingDistance(flight.lat, flight.lon);
-		flight.eta = calculateArrivalTime(flight.lat, flight.lon, flight.groundspeed);
+		var flight = createFlightObject(data);
 
 		if($("#" + flight.callsign).length == 0) {
 			createStrip(flight);
@@ -86,6 +65,30 @@ function updateData() {
 		fastMode: true,
 		complete: parseData
 	});
+}
+
+// Turns the raw data array of a VATSIM flight into an object (and performs some checks/enhancements)
+function createFlightObject(rawData) {
+	var flight = {
+		callsign: rawData[0],
+		lat: parseFloat(rawData[5]),
+		lon: parseFloat(rawData[6]),
+		alt: parseInt(rawData[7]),
+		groundspeed: rawData[8],
+		aircraft: rawData[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2],
+		origin: rawData[11],
+		rfl: rawData[12],
+		destination: rawData[13],
+		squawk: rawData[17],
+		route: rawData[30],
+		dtg: null,
+		eta: null
+	};
+	flight.rfl = (flight.rfl.indexOf("FL") == -1 && parseInt(flight.rfl) > TRANS_ALT) ? 'FL' + flight.rfl.substring(0, flight.rfl.length-2) : flight.rfl;
+	flight.dtg = calculateRemainingDistance(flight.lat, flight.lon);
+	flight.eta = calculateArrivalTime(flight.lat, flight.lon, flight.groundspeed);
+
+	return flight;
 }
 
 /*
