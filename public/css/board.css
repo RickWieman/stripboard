@@ -1,6 +1,20 @@
 html, body {
 	font-family: sans-serif;
 	font-size: 0.9em;
+	background-color: #ddd;
+}
+
+input, textarea {
+	color: #cc0080;
+	font-family: sans-serif;
+}
+
+.strike {
+	background-image: url('/img/strike.png');
+}
+
+.check {
+	background-image: url('/img/check.png');
 }
 
 .gridster * {
@@ -28,14 +42,12 @@ html, body {
 	display: block;
 	font-size: 0.8em;
 	overflow: hidden;
+	background-color: #fff;
+	box-shadow: 2px 2px 5px #000;
 }
 
 .gridster .gs-w {
 	cursor: pointer;
-}
-
-.gridster .player {
-	background: #BBB;
 }
 
 .gridster .preview-holder {

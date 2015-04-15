@@ -22,6 +22,14 @@ function createStrip(data) {
 	else if(data[13] == AIRPORT) {
 		createStripInbound(data);
 	}
+
+	$("#" + data[0] + " div.callsign").on("click", function() {
+		$(this).toggleClass('strike');
+	});
+
+	$("#" + data[0] + " div.arr_airport").on("click", function() {
+		$(this).toggleClass('check');
+	});
 }
 
 // Creates a strip for an inbound flight
@@ -31,7 +39,7 @@ function createStripInbound(data) {
 
 	var strip = '<li id="'+data[0]+'" class="inbound">' +
 		'<div class="column col1"><textarea></textarea></div>' + 
-		'<div class="column col2"><div class="gate">GATE</div><div class="inputs"><input class="gate"></div><div class="eobt">1805</div></div>' + 
+		'<div class="column col2"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">1805</div></div>' + 
 		'<div class="column col3"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>27</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +
@@ -48,7 +56,7 @@ function createStripOutbound(data) {
 	var route = routeSegments.join(' ');
 
 	var strip = '<li id="'+data[0]+'" class="outbound">' +
-		'<div class="column col1"><div class="gate">GATE</div><div class="inputs"><input class="gate"></div><div class="eobt">1800</div></div>' +
+		'<div class="column col1"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">1800</div></div>' +
 		'<div class="column col2"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>24</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +

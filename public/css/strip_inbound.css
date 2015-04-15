@@ -1,5 +1,5 @@
 .gridster li.inbound {
-	border: 1px yellow solid;
+	border: 1px #C7BA00 solid;
 }
 
 .gridster li.inbound div.inputs input {
@@ -53,6 +53,15 @@
 		top: 0;
 		width: 60px;
 	}
+	.gridster li.inbound div.gate input {
+		position: absolute;
+		left: 0;
+		top: 2px;
+		border: 0;
+		width: 60px;
+		text-align: center;
+	}
+
 	.gridster li.inbound div.eobt {
 		bottom: 0;
 		width: 60px;

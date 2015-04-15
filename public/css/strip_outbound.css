@@ -1,5 +1,5 @@
 .gridster li.outbound {
-	border: 1px blue solid;
+	border: 1px #1B00C7 solid;
 }
 
 .gridster li.outbound div.inputs input {
@@ -36,6 +36,15 @@
 		top: 0;
 		width: 60px;
 	}
+	.gridster li.outbound div.gate input {
+		position: absolute;
+		left: 0;
+		top: 2px;
+		border: 0;
+		width: 60px;
+		text-align: center;
+	}
+
 	.gridster li.outbound div.eobt {
 		bottom: 0;
 		width: 60px;
