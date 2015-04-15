@@ -1,5 +1,20 @@
-// Fill in your airport here
+// Fill in your airport data here
 var AIRPORT = 'EHAM';
+var AIRPORT_LAT = 52.3081;
+var AIRPORT_LON = 4.7642;
+
+// Converts a number into radians
+Number.prototype.toRad = function() {
+	return this * Math.PI / 180;
+}
+
+// Adds leading zeroes to a number
+// Thanks to http://stackoverflow.com/a/11187738/2137833
+Number.prototype.pad = function(size) {
+	var s = String(this);
+	while (s.length < (size || 2)) {s = "0" + s;}
+	return s;
+}
 
 // Callback for CSV parser; adds new strips for new flightplans
 function parseData(data, file) {
@@ -12,6 +27,31 @@ function parseData(data, file) {
 			createStrip(flight);
 		}
 	});
+}
+
+// Calculates great-circle distance between aircraft and airport
+// Thanks to http://www.movable-type.co.uk/scripts/latlong.html
+function calculateRemainingDistance(lat, lon) {
+	var R = 6371; // km
+	var fi1 = AIRPORT_LAT.toRad();
+	var fi2 = lat.toRad();
+	var deltafi = (lat-AIRPORT_LAT).toRad();
+	var deltalambda = (lon-AIRPORT_LON).toRad();
+
+	var a = Math.sin(deltafi/2) * Math.sin(deltafi/2) +
+	        Math.cos(fi1) * Math.cos(fi2) *
+	        Math.sin(deltalambda/2) * Math.sin(deltalambda/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+	return R * c * 0.5399568; // NM
+}
+
+// Calculates ETA, based on remaining distance and speed
+function calculateArrivalTime(lat, lon, speed) {
+	var timeRemaining = calculateRemainingDistance(lat, lon) / speed * 60 * 60 * 1000; // milliseconds
+	var date = new Date((new Date()).valueOf() + timeRemaining);
+
+	return "" + date.getUTCHours().pad() + date.getUTCMinutes().pad();
 }
 
 // Creates and adds a strip to the board
@@ -32,14 +72,39 @@ function createStrip(data) {
 	});
 }
 
+// Updates a strip by filling in new data
+function updateStrip(data) {
+	var route;
+
+	if(data[11] == AIRPORT) {
+		var routeSegments = data[30].split(' ').slice(0, 3);
+		route = routeSegments.join(' ');
+	}
+	else if(data[13] == AIRPORT) {
+		var time = calculateArrivalTime(parseFloat(data[5]), parseFloat(data[6]), data[8]);
+		$("#" + data[0] + " .eobt").html(time);
+
+		route = data[30].split(' ').pop();
+	}
+
+	var aircraft = data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2];
+	$("#" + data[0] + " .aircraft").html(aircraft);
+
+	$("#" + data[0] + " .dep_airport").html(data[11]);
+	$("#" + data[0] + " .arr_airport").html(data[13]);
+	$("#" + data[0] + " .route").html(route);
+	$("#" + data[0] + " .sq_id").html(data[17]);
+}
+
 // Creates a strip for an inbound flight
 function createStripInbound(data) {
 	var aircraft = data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2];
 	var route = data[30].split(' ').pop();
+	var time = calculateArrivalTime(parseFloat(data[5]), parseFloat(data[6]), data[8]);
 
 	var strip = '<li id="'+data[0]+'" class="inbound">' +
 		'<div class="column col1"><textarea></textarea></div>' + 
-		'<div class="column col2"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">1805</div></div>' + 
+		'<div class="column col2"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">'+time+'</div></div>' + 
 		'<div class="column col3"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>27</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +
