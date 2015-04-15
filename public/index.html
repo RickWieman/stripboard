@@ -12,9 +12,9 @@
 		<link rel="stylesheet" type="text/css" href="css/strip_outbound.css">
 	</head>
 	<body>
-		<h1>Flight Progress Strips</h1>
-
-		<p><a href='javascript:updateData()'>Update</a></p>
+		<div class="info"><h1>Flight Progress Strips Board</h1>
+		<p>Currently serving <span id="airport"></span>.</p>
+		<p><a href='javascript:updateData()'>Fetch new strips</a></p></div>
 
 		<div class="gridster">
 			<ul></ul>
@@ -26,7 +26,8 @@
 		$(function(){
 			gridster = $(".gridster > ul").gridster({
 				widget_margins: [5, 5],
-				widget_base_dimensions: [230, 60]
+				widget_base_dimensions: [230, 60],
+				max_cols: 6
 			}).data('gridster');
 		});
 

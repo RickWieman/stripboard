@@ -4,6 +4,17 @@ html, body {
 	background-color: #ddd;
 }
 
+h1 {
+	font-size: 1.2em;
+}
+
+.info {
+	position: fixed;
+	right: 10px;
+	top: 0;
+	text-align: right;
+}
+
 input, textarea {
 	color: #cc0080;
 	font-family: sans-serif;
