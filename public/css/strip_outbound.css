@@ -2,40 +2,69 @@
 	border: 1px blue solid;
 }
 
+.gridster li.outbound div.inputs input {
+	position: absolute;
+	border: 0;
+}
+
 .gridster li.outbound div.column {
 	display: inline-block;
 	position: relative;
 	left: 0;
 	top: 0;
 	text-align: center;
-	height: 80px;
+	height: 60px;
 }
 
 	.gridster li.outbound div.column div {
-		height: 30px;
-		line-height: 30px;
+		height: 20px;
+		line-height: 20px;
 		position: absolute;
 	}
 
 .gridster li.outbound div.col1 {
-	width: 100px;
+	width: 60px;
 }
+
+	.gridster li.outbound input.gate {
+		left: 0;
+		top: 25px;
+		width: 60px;
+	}
 
 	.gridster li.outbound div.gate {
 		top: 0;
-		width: 100px;
+		width: 60px;
 	}
 	.gridster li.outbound div.eobt {
 		bottom: 0;
-		width: 100px;
+		width: 60px;
 		font-weight: bold;
 	}
 
 .gridster li.outbound div.col2 {
 	border-left: 1px solid #000;
 	border-right: 1px solid #000;
-	width: 200px;
+	width: 180px;
 }
+
+	.gridster li.outbound input.origin {
+		left: 0;
+		top: 25px;
+		width: 50px;
+	}
+
+	.gridster li.outbound input.callsign {
+		left: 50px;
+		top: 25px;
+		width: 82px;
+	}
+
+	.gridster li.outbound input.destination {
+		left: 132px;
+		top: 25px;
+		width: 48px;
+	}
 
 	.gridster li.outbound div.aircraft {
 		top: 0;
@@ -44,7 +73,7 @@
 
 	.gridster li.outbound div.callsign {
 		left: 50px;
-		width: 100px;
+		width: 80px;
 		border-color: #000;
 		border-width: 0px 1px 1px 1px;
 		border-style: solid;
@@ -60,8 +89,8 @@
 	.gridster li.outbound div.runway span {
 		display: inline-block;
 		width: 30px;
-		height: 22px;
-		line-height: 22px;
+		height: 16px;
+		line-height: 16px;
 		background-color: #000;
 		color: #fff;
 	}
@@ -78,8 +107,20 @@
 	}
 
 .gridster li.outbound div.col3 {
-	width: 100px;
+	width: 90px;
 }
+
+	.gridster li.outbound input.rfl {
+		left: 0;
+		top: 25px;
+		width: 45px;
+	}
+
+	.gridster li.outbound input.sid {
+		left: 45px;
+		top: 25px;
+		width: 45px;
+	}
 
 	.gridster li.outbound div.rfl {
 		left: 0;
@@ -94,7 +135,7 @@
 
 	.gridster li.outbound div.sq_mode {
 		bottom: 0;
-		width: 40px;
+		width: 30px;
 		text-align: right;
 	}
 	.gridster li.outbound div.sq_id {
@@ -106,11 +147,18 @@
 
 .gridster li.outbound div.col4 {
 	border-left: 1px solid #000;
-	width: 175px;
+	width: 125px;
 }
+	
+	.gridster li.outbound input.route {
+		left: 0;
+		top: 25px;
+		width: 135px;
+	}
+
 	.gridster li.outbound div.route {
 		top: 0;
-		width: 194px;
+		width: 125px;
 		text-align: left;
 		padding: 0px 5px 0px 5px;
 	}

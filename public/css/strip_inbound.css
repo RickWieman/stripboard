@@ -2,44 +2,84 @@
 	border: 1px yellow solid;
 }
 
+.gridster li.inbound div.inputs input {
+	position: absolute;
+	border: 0;
+}
+
 .gridster li.inbound div.column {
 	display: inline-block;
 	position: relative;
 	left: 0;
 	top: 0;
 	text-align: center;
-	height: 80px;
+	height: 60px;
 }
 
 	.gridster li.inbound div.column div {
-		height: 30px;
-		line-height: 30px;
+		height: 20px;
+		line-height: 20px;
 		position: absolute;
 	}
 
 .gridster li.inbound div.col1 {
-	width: 150px;
+	width: 140px;
 }
+
+	.gridster li.inbound div.col1 textarea {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 140px;
+		height: 60px;
+		overflow: hidden;
+		resize: none;
+		border: 0;
+	}
 
 .gridster li.inbound div.col2 {
 	border-left: 1px solid #000;
 	border-right: 1px solid #000;
-	width: 100px;
+	width: 60px;
 }
+
+	.gridster li.inbound input.gate {
+		left: 0;
+		top: 25px;
+		width: 60px;
+	}
 
 	.gridster li.inbound div.gate {
 		top: 0;
-		width: 100px;
+		width: 60px;
 	}
 	.gridster li.inbound div.eobt {
 		bottom: 0;
-		width: 100px;
+		width: 60px;
 		font-weight: bold;
 	}
 
 .gridster li.inbound div.col3 {
-	width: 200px;
+	width: 180px;
 }
+	
+	.gridster li.inbound input.origin {
+		left: 0;
+		top: 25px;
+		width: 50px;
+	}
+
+	.gridster li.inbound input.callsign {
+		left: 50px;
+		top: 25px;
+		width: 82px;
+	}
+
+	.gridster li.inbound input.destination {
+		left: 132px;
+		top: 25px;
+		width: 50px;
+	}
 
 	.gridster li.inbound div.aircraft {
 		top: 0;
@@ -48,7 +88,7 @@
 
 	.gridster li.inbound div.callsign {
 		left: 50px;
-		width: 100px;
+		width: 80px;
 		border-color: #000;
 		border-width: 0px 1px 1px 1px;
 		border-style: solid;
@@ -64,8 +104,8 @@
 	.gridster li.inbound div.runway span {
 		display: inline-block;
 		width: 30px;
-		height: 22px;
-		line-height: 22px;
+		height: 16px;
+		line-height: 16px;
 		background-color: #000;
 		color: #fff;
 	}
@@ -83,20 +123,28 @@
 
 .gridster li.inbound div.col4 {
 	border-left: 1px solid #000;
-	width: 75px;
+	width: 80px;
 }
+
+	.gridster li.inbound input.route {
+		left: 0;
+		top: 25px;
+		width: 80px;
+	}
+
 	.gridster li.inbound div.route {
 		top: 0;
-		width: 194px;
+		width: 80px;
 		text-align: left;
 		padding: 0px 5px 0px 5px;
 	}
 
 	.gridster li.inbound div.sq_mode {
 		bottom: 0;
-		width: 25px;
+		width: 35px;
 		text-align: right;
 	}
+
 	.gridster li.inbound div.sq_id {
 		bottom: 0;
 		right: 0;

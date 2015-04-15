@@ -30,11 +30,13 @@ function createStripInbound(data) {
 	var route = data[30].split(' ').pop();
 
 	var strip = '<li id="'+data[0]+'" class="inbound">' +
-		'<div class="column col1"></div>' + 
-		'<div class="column col2"><div class="gate">GATE</div><div class="eobt">1805</div></div>' + 
+		'<div class="column col1"><textarea></textarea></div>' + 
+		'<div class="column col2"><div class="gate">GATE</div><div class="inputs"><input class="gate"></div><div class="eobt">1805</div></div>' + 
 		'<div class="column col3"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>27</span></div>' +
+		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +
-		'<div class="column col4"><div class="route">'+route+'</div><div class="sq_mode">C</div><div class="sq_id">'+data[17]+'</div></div></li>';
+		'<div class="column col4"><div class="route">'+route+'</div><div class="sq_mode">C</div>' +
+		'<div class="inputs"><input class="route"></div><div class="sq_id">'+data[17]+'</div></div></li>';
 
 	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 1, 1);
 }
@@ -42,14 +44,17 @@ function createStripInbound(data) {
 // Creates a strip for an outbound flight
 function createStripOutbound(data) {
 	var aircraft = data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2];
-	var route = data[30];
+	var routeSegments = data[30].split(' ').slice(0, 3);
+	var route = routeSegments.join(' ');
 
 	var strip = '<li id="'+data[0]+'" class="outbound">' +
-		'<div class="column col1"><div class="gate">GATE</div><div class="eobt">1800</div></div>' +
+		'<div class="column col1"><div class="gate">GATE</div><div class="inputs"><input class="gate"></div><div class="eobt">1800</div></div>' +
 		'<div class="column col2"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>24</span></div>' +
+		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +
-		'<div class="column col3"><div class="rfl">'+data[12]+'</div><div class="sid">VAL1S</div><div class="sq_mode">C</div><div class="sq_id">'+data[17]+'</div></div>' +
-		'<div class="column col4"><div class="route">'+route+'</div></div></li>';
+		'<div class="column col3"><div class="rfl">'+data[12]+'</div><div class="sid">VAL1S</div>' + 
+		'<div class="inputs"><input class="rfl"> <input class="sid"></div><div class="sq_mode">C</div><div class="sq_id">'+data[17]+'</div></div>' +
+		'<div class="column col4"><div class="route">'+route+'</div><div class="inputs"><input class="route"></div></div></li>';
 
 
 	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 5, 1);
