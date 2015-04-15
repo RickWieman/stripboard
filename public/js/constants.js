@@ -18,9 +18,11 @@ const EXIT_POINTS = ['ANDIK','ARNEM','BERGI','EDUPO','GORLO','LEKKO','LOPIK','VA
 
 // Array with all landing runways
 const LANDING_RUNWAYS = ['04','06','09','18C','18R','22','24','27','36C','36R'];
+const LANDING_RUNWAYS_DEFAULT = '06';
 
 // Array with all takeoff runways
 const TAKEOFF_RUNWAYS = ['04','06','09','18C','18L','22','24','27','36C','36L'];
+const TAKEOFF_RUNWAYS_DEFAULT = '36L';
 
 // Array with all SIDs. Defined as { runway: [ exitpoint: SID, ... ], ... }
 // Currently no support for multiple SIDs.

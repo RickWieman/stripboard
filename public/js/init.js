@@ -2,11 +2,15 @@ $(function() {
 	$("#airport").html(AIRPORT);
 
 	$.each(LANDING_RUNWAYS, function(id, runway) {
-		$("#landing").append('<option value="'+runway+'">'+runway+'</option>');
+		var selected = (runway == LANDING_RUNWAYS_DEFAULT) ? ' selected="selected"' : '';
+
+		$("#landing").append('<option value="'+runway+'"'+selected+'>'+runway+'</option>');
 	});
 
 	$.each(TAKEOFF_RUNWAYS, function(id, runway) {
-		$("#takeoff").append('<option value="'+runway+'">'+runway+'</option>');
+		var selected = (runway == TAKEOFF_RUNWAYS_DEFAULT) ? ' selected="selected"' : '';
+
+		$("#takeoff").append('<option value="'+runway+'"'+selected+'>'+runway+'</option>');
 	});
 
 	$(".gridster > ul").gridster({
