@@ -16,6 +16,12 @@ const ENTRY_POINTS = ['EELDE','EEL','NORKU','REKKEN','RKN','DENUT','HELEN','PUTT
 // Array with all exit points of the TMA. These are formally the begin of a flight route.
 const EXIT_POINTS = ['ANDIK','ARNEM','BERGI','EDUPO','GORLO','LEKKO','LOPIK','VALKO'];
 
+// Array with all landing runways
+const LANDING_RUNWAYS = ['04','06','09','18C','18R','22','24','27','36C','36R'];
+
+// Array with all takeoff runways
+const TAKEOFF_RUNWAYS = ['04','06','09','18C','18L','22','24','27','36C','36L'];
+
 // Array with all SIDs. Defined as { runway: [ exitpoint: SID, ... ], ... }
 // Currently no support for multiple SIDs.
 const SIDs = {

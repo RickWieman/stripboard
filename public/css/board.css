@@ -11,8 +11,12 @@ h1 {
 .info {
 	position: fixed;
 	right: 10px;
-	top: 0;
+	top: 10px;
 	text-align: right;
+	z-index: 999;
+	background-color: #eee;
+	padding: 0px 5px 0px 5px;
+	border: 1px solid #000;
 }
 
 input, textarea {

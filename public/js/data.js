@@ -26,6 +26,9 @@ function parseData(data, file) {
 		if($("#" + flight.callsign).length == 0) {
 			createStrip(flight);
 		}
+		else {
+			updateStrip(flight);
+		}
 	});
 }
 
@@ -56,8 +59,6 @@ function calculateArrivalTime(lat, lon, speed) {
 
 // Updates the data by using a CSV parser on the VATSIM data
 function updateData() {
-	$("#airport").html(AIRPORT);
-	
 	Papa.parse('/data/vatsim-data.txt', {
 		download: true,
 		delimiter: ':',

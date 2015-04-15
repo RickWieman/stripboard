@@ -1,3 +1,6 @@
+// Runway selection. Will be set dynamically via a dropdown menu.
+var RUNWAY_INBOUND, RUNWAY_OUTBOUND;
+
 // Creates and adds a strip to the board
 function createStrip(flight) {
 	if(flight.origin == AIRPORT) {
@@ -19,22 +22,26 @@ function createStrip(flight) {
 // Updates a strip by filling in new data
 function updateStrip(flight) {
 	var route;
+	var runway;
 
 	if(flight.origin == AIRPORT) {
-		$("#" + flight.callsign + " .sid").html(createSID('24', flight.route));
+		$("#" + flight.callsign + " .sid").html(createSID(RUNWAY_OUTBOUND, flight.route));
 
 		route = createOutboundRoute(flight.route);
+		runway = RUNWAY_OUTBOUND;
 	}
 	else if(flight.destination == AIRPORT) {
 		$("#" + flight.callsign + " .eobt").html(flight.eta);
 
 		route = createInboundRoute(flight.route);
+		runway = RUNWAY_INBOUND;
 	}
 
 	$("#" + flight.callsign + " .aircraft").html(flight.aircraft);
 	$("#" + flight.callsign + " .dep_airport").html(flight.origin);
 	$("#" + flight.callsign + " .arr_airport").html(flight.destination);
 	$("#" + flight.callsign + " .route").html(route);
+	$("#" + flight.callsign + " .runway span").html(runway);
 	$("#" + flight.callsign + " .sq_id").html(flight.squawk);
 }
 
@@ -43,7 +50,7 @@ function createStripInbound(flight) {
 	var strip = '<li id="'+flight.callsign+'" class="inbound">' +
 		'<div class="column col1"><textarea></textarea></div>' + 
 		'<div class="column col2"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">'+flight.eta+'</div></div>' + 
-		'<div class="column col3"><div class="aircraft">'+flight.aircraft+'</div><div class="callsign">'+flight.callsign+'</div><div class="runway"><span>27</span></div>' +
+		'<div class="column col3"><div class="aircraft">'+flight.aircraft+'</div><div class="callsign">'+flight.callsign+'</div><div class="runway"><span>'+RUNWAY_INBOUND+'</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+flight.origin+'</div><div class="arr_airport">'+flight.destination+'</div></div>' +
 		'<div class="column col4"><div class="route">'+createInboundRoute(flight.route)+'</div><div class="sq_mode">C</div>' +
@@ -88,11 +95,11 @@ function createSID(runway, rawRoute) {
 // Creates a strip for an outbound flight
 function createStripOutbound(flight) {
 	var route = createOutboundRoute(flight.route);
-	var sid = createSID('24', flight.route);
+	var sid = createSID(RUNWAY_OUTBOUND, flight.route);
 
 	var strip = '<li id="'+flight.callsign+'" class="outbound">' +
 		'<div class="column col1"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">1800</div></div>' +
-		'<div class="column col2"><div class="aircraft">'+flight.aircraft+'</div><div class="callsign">'+flight.callsign+'</div><div class="runway"><span>24</span></div>' +
+		'<div class="column col2"><div class="aircraft">'+flight.aircraft+'</div><div class="callsign">'+flight.callsign+'</div><div class="runway"><span>'+RUNWAY_OUTBOUND+'</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+flight.origin+'</div><div class="arr_airport">'+flight.destination+'</div></div>' +
 		'<div class="column col3"><div class="rfl">'+flight.rfl+'</div><div class="sid">'+sid+'</div>' + 

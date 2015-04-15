@@ -8,6 +8,7 @@
 		<script type="text/javascript" src="js/constants.js"></script>
 		<script type="text/javascript" src="js/data.js"></script>
 		<script type="text/javascript" src="js/strips.js"></script>
+		<script type="text/javascript" src="js/init.js"></script>
 		<link rel="stylesheet" type="text/css" href="vendor/jquery.gridster.min.css">
 		<link rel="stylesheet" type="text/css" href="css/board.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_inbound.css">
@@ -15,26 +16,16 @@
 	</head>
 	<body>
 		<div class="info"><h1>Flight Progress Strips Board</h1>
-		<p>Currently serving <span id="airport"></span>.</p>
-		<p><a href='javascript:updateData()'>Fetch new strips</a></p></div>
+		<p>Current airport: <span id="airport"></span></p>
+		<p><a href='javascript:updateData()'>Update</a></p>
+
+		<p>Landing Runway: <select class="runway" id="landing"></select></p>
+		<p>Takeoff Runway: <select class="runway" id="takeoff"></select></p>
+		</div>
 
 		<div class="gridster">
 			<ul></ul>
 		</div>
-
-		<script type="text/javascript" id="code">
-		var gridster;
-
-		$(function(){
-			gridster = $(".gridster > ul").gridster({
-				widget_margins: [5, 5],
-				widget_base_dimensions: [230, 60],
-				max_cols: 6
-			}).data('gridster');
-		});
-
-		updateData();
-		</script>
 	</body>
 </html>
 
