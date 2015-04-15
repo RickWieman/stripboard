@@ -84,7 +84,7 @@ function createFlightObject(rawData) {
 		dtg: null,
 		eta: null
 	};
-	flight.rfl = (flight.rfl.indexOf("FL") == -1 && parseInt(flight.rfl) > TRANS_ALT) ? 'FL' + flight.rfl.substring(0, flight.rfl.length-2) : flight.rfl;
+	flight.rfl = (flight.rfl.indexOf("FL") == -1 && parseInt(flight.rfl) >= 1000) ? 'FL' + parseInt(flight.rfl.substring(0, flight.rfl.length-2)).pad(3) : flight.rfl;
 	flight.dtg = calculateRemainingDistance(flight.lat, flight.lon);
 	flight.eta = calculateArrivalTime(flight.lat, flight.lon, flight.groundspeed);
 
