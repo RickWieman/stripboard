@@ -1,5 +1,8 @@
+// This file handles regular data updates from VATSIM.
+// It provides the data as flight objects for the strip handler.
+
 // Fill in your airport data here
-var AIRPORT = 'EHAM';
+var AIRPORT = 'EHAM'; // ICAO
 var AIRPORT_LAT = 52.3081;
 var AIRPORT_LON = 4.7642;
 
@@ -22,8 +25,26 @@ function parseData(data, file) {
 		return val[3] == 'PILOT' && (val[11] == AIRPORT || val[13] == AIRPORT);
 	});
 
-	$.each(results, function(id, flight) {
-		if($("#" + flight[0]).length == 0) {
+	$.each(results, function(id, data) {
+		var flight = {
+			callsign: data[0],
+			lat: parseFloat(data[5]),
+			lon: parseFloat(data[6]),
+			alt: data[7],
+			groundspeed: data[8],
+			aircraft: data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2],
+			origin: data[11],
+			rfl: data[12],
+			destination: data[13],
+			squawk: data[17],
+			route: data[30],
+			dtg: null,
+			eta: null
+		};
+		flight.dtg = calculateRemainingDistance(flight.lat, flight.lon);
+		flight.eta = calculateArrivalTime(flight.lat, flight.lon, flight.groundspeed);
+
+		if($("#" + flight.callsign).length == 0) {
 			createStrip(flight);
 		}
 	});
@@ -52,85 +73,6 @@ function calculateArrivalTime(lat, lon, speed) {
 	var date = new Date((new Date()).valueOf() + timeRemaining);
 
 	return "" + date.getUTCHours().pad() + date.getUTCMinutes().pad();
-}
-
-// Creates and adds a strip to the board
-function createStrip(data) {
-	if(data[11] == AIRPORT) {
-		createStripOutbound(data);
-	}
-	else if(data[13] == AIRPORT) {
-		createStripInbound(data);
-	}
-
-	$("#" + data[0] + " div.callsign").on("click", function() {
-		$(this).toggleClass('strike');
-	});
-
-	$("#" + data[0] + " div.arr_airport").on("click", function() {
-		$(this).toggleClass('check');
-	});
-}
-
-// Updates a strip by filling in new data
-function updateStrip(data) {
-	var route;
-
-	if(data[11] == AIRPORT) {
-		var routeSegments = data[30].split(' ').slice(0, 3);
-		route = routeSegments.join(' ');
-	}
-	else if(data[13] == AIRPORT) {
-		var time = calculateArrivalTime(parseFloat(data[5]), parseFloat(data[6]), data[8]);
-		$("#" + data[0] + " .eobt").html(time);
-
-		route = data[30].split(' ').pop();
-	}
-
-	var aircraft = data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2];
-	$("#" + data[0] + " .aircraft").html(aircraft);
-
-	$("#" + data[0] + " .dep_airport").html(data[11]);
-	$("#" + data[0] + " .arr_airport").html(data[13]);
-	$("#" + data[0] + " .route").html(route);
-	$("#" + data[0] + " .sq_id").html(data[17]);
-}
-
-// Creates a strip for an inbound flight
-function createStripInbound(data) {
-	var aircraft = data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2];
-	var route = data[30].split(' ').pop();
-	var time = calculateArrivalTime(parseFloat(data[5]), parseFloat(data[6]), data[8]);
-
-	var strip = '<li id="'+data[0]+'" class="inbound">' +
-		'<div class="column col1"><textarea></textarea></div>' + 
-		'<div class="column col2"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">'+time+'</div></div>' + 
-		'<div class="column col3"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>27</span></div>' +
-		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
-		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +
-		'<div class="column col4"><div class="route">'+route+'</div><div class="sq_mode">C</div>' +
-		'<div class="inputs"><input class="route"></div><div class="sq_id">'+data[17]+'</div></div></li>';
-
-	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 1, 1);
-}
-
-// Creates a strip for an outbound flight
-function createStripOutbound(data) {
-	var aircraft = data[9].match(/([A-Z]*\/)?([A-Z0-9\-]*)(\/[A-Z]*)?/)[2];
-	var routeSegments = data[30].split(' ').slice(0, 3);
-	var route = routeSegments.join(' ');
-
-	var strip = '<li id="'+data[0]+'" class="outbound">' +
-		'<div class="column col1"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">1800</div></div>' +
-		'<div class="column col2"><div class="aircraft">'+aircraft+'</div><div class="callsign">'+data[0]+'</div><div class="runway"><span>24</span></div>' +
-		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
-		'<div class="dep_airport">'+data[11]+'</div><div class="arr_airport">'+data[13]+'</div></div>' +
-		'<div class="column col3"><div class="rfl">'+data[12]+'</div><div class="sid">VAL1S</div>' + 
-		'<div class="inputs"><input class="rfl"> <input class="sid"></div><div class="sq_mode">C</div><div class="sq_id">'+data[17]+'</div></div>' +
-		'<div class="column col4"><div class="route">'+route+'</div><div class="inputs"><input class="route"></div></div></li>';
-
-
-	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 5, 1);
 }
 
 // Updates the data by using a CSV parser on the VATSIM data
