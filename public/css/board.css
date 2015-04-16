@@ -19,7 +19,11 @@ h1 {
 	border: 1px solid #000;
 }
 
-input, textarea {
+	#range {
+		width: 30px;
+	}
+
+.gridster input, .gridster textarea {
 	color: #cc0080;
 	font-family: sans-serif;
 }

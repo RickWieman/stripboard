@@ -19,6 +19,12 @@ $(function() {
 		max_cols: 6
 	}).data('gridster');
 
+	RANGE = $("#range")[0].value;
+	$("#range").on("change", function() {
+		RANGE = $(this)[0].value;
+		updateData();
+	});
+
 	RUNWAY_INBOUND = $("#landing")[0].value;
 	$("#landing").on("change", function() {
 		RUNWAY_INBOUND = $(this)[0].value;
@@ -30,6 +36,8 @@ $(function() {
 		RUNWAY_OUTBOUND = $(this)[0].value;
 		updateData();
 	});
+
+	window.setInterval(updateData, UPDATE_FREQUENCY);
 
 	updateData();
 });

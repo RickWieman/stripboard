@@ -1,14 +1,14 @@
 // This file contains all constants for the strip board.
 
+// Update frequency (i.e. frequency on which updateData() gets called) in milliseconds
+const UPDATE_FREQUENCY = 2 * 60 * 1000;
+
 // ICAO code of your airport
 const AIRPORT = 'EHAM';
 
 // Location of the airport (for ETA/DTG calculations)
 const AIRPORT_LAT = 52.3081;
 const AIRPORT_LON = 4.7642;
-
-// Range (inbound strip will be added once flight is in range)
-const RANGE = 10;
 
 // Array with all entry points of the TMA. These are formally the end of a flight route.
 const ENTRY_POINTS = ['EELDE','EEL','NORKU','REKKEN','RKN','DENUT','HELEN','PUTTY','PESER','LAMSO','MOLIX','REDFA','TOPPA'];

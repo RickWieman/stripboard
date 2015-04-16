@@ -1,5 +1,5 @@
 // Runway selection. Will be set dynamically via a dropdown menu.
-var RUNWAY_INBOUND, RUNWAY_OUTBOUND;
+var RUNWAY_INBOUND, RUNWAY_OUTBOUND, RANGE;
 
 // Creates and adds a strip to the board
 function createStrip(flight) {

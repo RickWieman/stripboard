@@ -18,7 +18,9 @@
 	<body>
 		<div class="info"><h1>Flight Progress Strips Board</h1>
 		<p>Current airport: <span id="airport"></span></p>
-		<p><a href='javascript:updateData()'>Update</a></p>
+		<p><a href='javascript:updateData()'>Manual Update</a></p>
+
+		<p>Inbound Range: <input type="text" id="range" value="10" /> (NM)</p>
 
 		<p>Landing RWY: <select class="runway" id="landing"></select> (<a href="javascript:occupyRunway('landing')">OCCUPY</a>)</p>
 		<p>Takeoff RWY: <select class="runway" id="takeoff"></select> (<a href="javascript:occupyRunway('takeoff')">OCCUPY</a>)</p>
