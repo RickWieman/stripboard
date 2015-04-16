@@ -81,7 +81,7 @@ function createFlightObject(rawData) {
 		rfl: rawData[12],
 		destination: rawData[13],
 		squawk: rawData[17],
-		route: rawData[30],
+		route: rawData[30].replace(/\-/g, " ").replace(/\+/g, ""),
 		dtg: null,
 		eta: null
 	};

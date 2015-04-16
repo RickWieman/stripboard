@@ -13,14 +13,15 @@
 		<link rel="stylesheet" type="text/css" href="css/board.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_inbound.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_outbound.css">
+		<link rel="stylesheet" type="text/css" href="css/strip_occupied.css">
 	</head>
 	<body>
 		<div class="info"><h1>Flight Progress Strips Board</h1>
 		<p>Current airport: <span id="airport"></span></p>
 		<p><a href='javascript:updateData()'>Update</a></p>
 
-		<p>Landing Runway: <select class="runway" id="landing"></select></p>
-		<p>Takeoff Runway: <select class="runway" id="takeoff"></select></p>
+		<p>Landing RWY: <select class="runway" id="landing"></select> (<a href="javascript:occupyRunway('landing')">OCCUPY</a>)</p>
+		<p>Takeoff RWY: <select class="runway" id="takeoff"></select> (<a href="javascript:occupyRunway('takeoff')">OCCUPY</a>)</p>
 		</div>
 
 		<div class="gridster">

@@ -19,6 +19,35 @@ function createStrip(flight) {
 	});
 }
 
+// Occupies a runway by creating the appropriate strip (once)
+function occupyRunway(type) {
+	var runway;
+
+	switch(type) {
+		case 'landing':
+			runway = RUNWAY_INBOUND;
+			break;
+		case 'takeoff':
+			runway = RUNWAY_OUTBOUND;
+			break;
+	}
+
+	if($("#occupied" + runway).length == 0) {
+		createOccupiedStrip(runway);
+	}
+
+	$("#occupied" + runway + ' div.remove').on("click", function() {
+		$(".gridster ul").gridster().data('gridster').remove_widget($("#occupied" + runway));
+	});
+}
+
+// Creates a strip for an occupied runway
+function createOccupiedStrip(runway) {
+	var strip = '<li id="occupied'+runway+'" class="occupied"><div class="remove">X</div>RUNWAY '+runway+'</li>';
+
+	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 3, 1);
+}
+
 // Updates a strip by filling in new data
 function updateStrip(flight) {
 	var route;
