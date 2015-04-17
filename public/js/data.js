@@ -81,7 +81,7 @@ function createFlightObject(rawData) {
 		rfl: rawData[12],
 		destination: rawData[13],
 		squawk: parseInt(rawData[17]).pad(4),
-		route: rawData[30].replace(/\-/g, " ").replace(/\+/g, ""),
+		route: rawData[30].replace(/\-/g, " ").replace(/\./g, " ").replace(/\+/g, ""),
 		distanceToAirport: null,
 		eta: null
 	};
