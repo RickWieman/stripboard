@@ -1,12 +1,12 @@
 // Runway selection. Will be set dynamically via a dropdown menu.
-var RUNWAY_INBOUND, RUNWAY_OUTBOUND, RANGE;
+var RUNWAY_INBOUND, RUNWAY_OUTBOUND, RANGE_INBOUND, RANGE_OUTBOUND;
 
 // Creates and adds a strip to the board
 function createStrip(flight) {
-	if(flight.origin == AIRPORT) {
+	if(flight.origin == AIRPORT && flight.distanceToAirport < RANGE_OUTBOUND) {
 		createStripOutbound(flight);
 	}
-	else if(flight.destination == AIRPORT && flight.dtg < RANGE) {
+	else if(flight.destination == AIRPORT && flight.distanceToAirport < RANGE_INBOUND) {
 		createStripInbound(flight);
 	}
 
@@ -127,7 +127,7 @@ function createStripOutbound(flight) {
 	var sid = createSID(RUNWAY_OUTBOUND, flight.route);
 
 	var strip = '<li id="'+flight.callsign+'" class="outbound">' +
-		'<div class="column col1"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">1800</div></div>' +
+		'<div class="column col1"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">N/A</div></div>' +
 		'<div class="column col2"><div class="aircraft">'+flight.aircraft+'</div><div class="callsign">'+flight.callsign+'</div><div class="runway"><span>'+RUNWAY_OUTBOUND+'</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+flight.origin+'</div><div class="arr_airport">'+flight.destination+'</div></div>' +

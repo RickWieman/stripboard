@@ -82,12 +82,14 @@ function createFlightObject(rawData) {
 		destination: rawData[13],
 		squawk: parseInt(rawData[17]).pad(4),
 		route: rawData[30].replace(/\-/g, " ").replace(/\+/g, ""),
-		dtg: null,
+		distanceToAirport: null,
 		eta: null
 	};
 	flight.rfl = (flight.rfl.indexOf("FL") == -1 && parseInt(flight.rfl) >= 1000) ? 'FL' + parseInt(flight.rfl.substring(0, flight.rfl.length-2)).pad(3) : flight.rfl;
-	flight.dtg = calculateRemainingDistance(flight.lat, flight.lon);
-	flight.eta = calculateArrivalTime(flight.lat, flight.lon, flight.groundspeed);
+	flight.distanceToAirport = calculateRemainingDistance(flight.lat, flight.lon);
+
+	var eta = calculateArrivalTime(flight.lat, flight.lon, flight.groundspeed);
+	flight.eta = (eta != 'NaNNaN') ? eta : 'N/A';
 
 	return flight;
 }

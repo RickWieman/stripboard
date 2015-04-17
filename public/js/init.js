@@ -19,9 +19,15 @@ $(function() {
 		max_cols: 6
 	}).data('gridster');
 
-	RANGE = $("#range")[0].value;
-	$("#range").on("change", function() {
-		RANGE = $(this)[0].value;
+	RANGE_INBOUND = $("#rangeIn")[0].value;
+	$("#rangeIn").on("change", function() {
+		RANGE_INBOUND = $(this)[0].value;
+		updateData();
+	});
+
+	RANGE_OUTBOUND = $("#rangeOut")[0].value;
+	$("#rangeOut").on("change", function() {
+		RANGE_OUTBOUND = $(this)[0].value;
 		updateData();
 	});
 
