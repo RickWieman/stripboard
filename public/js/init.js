@@ -14,7 +14,7 @@ $(function() {
 	});
 
 	$(".gridster > ul").gridster({
-		widget_margins: [5, 5],
+		widget_margins: [5, 6],
 		widget_base_dimensions: [230, 60],
 		max_cols: 6
 	}).data('gridster');

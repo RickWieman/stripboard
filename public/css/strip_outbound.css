@@ -1,5 +1,5 @@
 .gridster li.outbound {
-	border: 1px #1B00C7 solid;
+	border-color: #1B00C7;
 }
 
 .gridster li.outbound div.inputs input {

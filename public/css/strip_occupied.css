@@ -1,5 +1,5 @@
 .gridster li.occupied {
-	border: 1px #000 solid;
+	border-color: #000;
 	text-align: center;
 	line-height: 60px;
 	font-size: 1.4em;
