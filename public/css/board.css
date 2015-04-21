@@ -4,7 +4,7 @@ html, body {
 }
 
 html {
-	background-image: url("/img/background.png");
+	background-image: url("/img/bg_board.png");
 	background-repeat: repeat-y;
 	background-position: 10px 0px;
 	background-color: #444;
@@ -32,6 +32,7 @@ h1 {
 .gridster input, .gridster textarea {
 	color: #cc0080;
 	font-family: sans-serif;
+	background: none;
 }
 
 .strike {
@@ -60,6 +61,7 @@ h1 {
 	font-size: 0.8em;
 	overflow: hidden;
 	background-color: #fff;
+	background-image: url("/img/bg_strip.png");
 	box-shadow: 2px 2px 5px #000;
 	border-style: solid;
 	border-width: 3px 0px;
