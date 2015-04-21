@@ -5,18 +5,33 @@ var RUNWAY_INBOUND, RUNWAY_OUTBOUND, RANGE_INBOUND, RANGE_OUTBOUND;
 function createStrip(flight) {
 	if(flight.origin == AIRPORT && flight.distanceToAirport < RANGE_OUTBOUND) {
 		createStripOutbound(flight);
+
+		$("#" + flight.callsign + " div.callsign").on("click", function() {
+			$(this).toggleClass('strike');
+		});
+
+		$("#" + flight.callsign + " div.arr_airport").on("click", function() {
+			$(this).toggleClass('check');
+		});
 	}
 	else if(flight.destination == AIRPORT && flight.distanceToAirport < RANGE_INBOUND) {
 		createStripInbound(flight);
-	}
 
-	$("#" + flight.callsign + " div.callsign").on("click", function() {
-		$(this).toggleClass('strike');
-	});
+		$("#" + flight.callsign + " div.col1").on("click", function() {
+			var element = $(this);
 
-	$("#" + flight.callsign + " div.arr_airport").on("click", function() {
-		$(this).toggleClass('check');
-	});
+			if(element.hasClass('initial')) {
+				element.toggleClass('cleared');
+				element.toggleClass('initial');
+			}
+			else if(element.hasClass('cleared')) {
+				element.toggleClass('cleared');
+			}
+			else {
+				element.toggleClass('initial');
+			}
+		});
+	}	
 }
 
 // Occupies a runway by creating the appropriate strip (once)
@@ -77,7 +92,7 @@ function updateStrip(flight) {
 // Creates a strip for an inbound flight
 function createStripInbound(flight) {
 	var strip = '<li id="'+flight.callsign+'" class="inbound">' +
-		'<div class="column col1"><textarea></textarea></div>' + 
+		'<div class="column col1"></div>' + 
 		'<div class="column col2"><div class="gate"><input placeholder="GATE"></div><div class="inputs"><input class="gate"></div><div class="eobt">'+flight.eta+'</div></div>' + 
 		'<div class="column col3"><div class="aircraft">'+flight.aircraft+'</div><div class="callsign">'+flight.callsign+'</div><div class="runway"><span>'+RUNWAY_INBOUND+'</span></div>' +
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +

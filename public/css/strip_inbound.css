@@ -24,17 +24,15 @@
 
 .gridster li.inbound div.col1 {
 	width: 140px;
+	height: 60px;
 }
 
-	.gridster li.inbound div.col1 textarea {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 140px;
-		height: 60px;
-		overflow: hidden;
-		resize: none;
-		border: 0;
+	.gridster li.inbound div.col1.initial {
+		background-image: url('/img/inbound_initial.png');
+	}
+
+	.gridster li.inbound div.col1.cleared {
+		background-image: url('/img/inbound_cleared.png');
 	}
 
 .gridster li.inbound div.col2 {
