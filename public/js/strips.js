@@ -1,8 +1,14 @@
 // Runway selection. Will be set dynamically via a dropdown menu.
 var RUNWAY_INBOUND, RUNWAY_OUTBOUND, RANGE_INBOUND, RANGE_OUTBOUND;
 
+var REMOVED_STRIPS = [];
+
 // Creates and adds a strip to the board
 function createStrip(flight) {
+	if($.inArray(flight.callsign, REMOVED_STRIPS) >= 0) {
+		return;
+	}
+
 	if(flight.origin == AIRPORT && flight.distanceToAirport < RANGE_OUTBOUND) {
 		createStripOutbound(flight);
 
@@ -10,7 +16,7 @@ function createStrip(flight) {
 			if($(this).data('dragging')) {
 				return;
 			}
-			
+
 			$(this).toggleClass('strike');
 		});
 
@@ -35,7 +41,13 @@ function createStrip(flight) {
 				element.toggleClass('initial');
 			}
 		});
-	}	
+	}
+
+	$("#" + flight.callsign + ' div.remove').on("click", function() {
+		REMOVED_STRIPS.push(flight.callsign);
+
+		$(".gridster ul").gridster().data('gridster').remove_widget($("#" + flight.callsign));
+	});
 }
 
 // Occupies a runway by creating the appropriate strip (once)
@@ -62,7 +74,7 @@ function occupyRunway(type) {
 
 // Creates a strip for an occupied runway
 function createOccupiedStrip(runway) {
-	var strip = '<li id="occupied'+runway+'" class="occupied"><div class="remove">X</div>RUNWAY '+runway+'</li>';
+	var strip = '<li id="occupied'+runway+'" class="occupied"><div class="text">RUNWAY '+runway+'</div><div class="remove">X</div></li>';
 
 	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 3, 1);
 }
@@ -102,7 +114,7 @@ function createStripInbound(flight) {
 		'<div class="inputs"><input class="origin"> <input class="callsign"> <input class="destination"></div>' +
 		'<div class="dep_airport">'+flight.origin+'</div><div class="arr_airport">'+flight.destination+'</div></div>' +
 		'<div class="column col4"><div class="route">'+createInboundRoute(flight.route)+'</div><div class="sq_mode">C</div>' +
-		'<div class="inputs"><input class="route"></div><div class="sq_id">'+flight.squawk+'</div></div></li>';
+		'<div class="inputs"><input class="route"></div><div class="sq_id">'+flight.squawk+'</div></div><div class="remove">X</div></li>';
 
 	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 1, 1);
 }
@@ -152,7 +164,7 @@ function createStripOutbound(flight) {
 		'<div class="dep_airport">'+flight.origin+'</div><div class="arr_airport">'+flight.destination+'</div></div>' +
 		'<div class="column col3"><div class="rfl">'+flight.rfl+'</div><div class="sid">'+sid+'</div>' + 
 		'<div class="inputs"><input class="rfl"> <input class="sid"></div><div class="sq_mode">C</div><div class="sq_id">'+flight.squawk+'</div></div>' +
-		'<div class="column col4"><div class="route">'+route+'</div><div class="inputs"><input class="route"></div></div></li>';
+		'<div class="column col4"><div class="route">'+route+'</div><div class="inputs"><input class="route"></div></div><div class="remove">X</div></li>';
 
 
 	$(".gridster ul").gridster().data('gridster').add_widget(strip, 2, 1, 5, 1);

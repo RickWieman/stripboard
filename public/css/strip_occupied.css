@@ -1,17 +1,8 @@
-.gridster li.occupied {
+.gridster li.occupied div.text {
 	border-color: #000;
 	text-align: center;
 	line-height: 60px;
-	font-size: 1.4em;
+	font-size: 1.8em;
 	font-weight: bold;
 }
 
-.gridster li.occupied div.remove {
-	position: absolute;
-	top: 0;
-	right: 2px;
-	line-height: 20px;
-	font-size: 0.8em;
-	font-weight: bold;
-	color: #c00;
-}
