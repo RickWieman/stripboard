@@ -21,6 +21,10 @@ function createStrip(flight) {
 		});
 
 		$("#" + flight.callsign + " div.arr_airport").on("click", function() {
+			if($(this).data('dragging')) {
+				return;
+			}
+
 			$(this).toggleClass('check');
 		});
 	}
@@ -28,6 +32,10 @@ function createStrip(flight) {
 		createStripInbound(flight);
 
 		$("#" + flight.callsign + " div.col1").on("click", function() {
+			if($(this).data('dragging')) {
+				return;
+			}
+
 			var element = $(this);
 
 			if(element.hasClass('initial')) {
@@ -44,6 +52,10 @@ function createStrip(flight) {
 	}
 
 	$("#" + flight.callsign + ' div.remove').on("click", function() {
+		if($(this).data('dragging')) {
+			return;
+		}
+
 		REMOVED_STRIPS.push(flight.callsign);
 
 		$(".gridster ul").gridster().data('gridster').remove_widget($("#" + flight.callsign));
@@ -68,6 +80,10 @@ function occupyRunway(type) {
 	}
 
 	$("#occupied" + runway + ' div.remove').on("click", function() {
+		if($(this).data('dragging')) {
+			return;
+		}
+		
 		$(".gridster ul").gridster().data('gridster').remove_widget($("#occupied" + runway));
 	});
 }
