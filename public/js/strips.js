@@ -7,6 +7,10 @@ function createStrip(flight) {
 		createStripOutbound(flight);
 
 		$("#" + flight.callsign + " div.callsign").on("click", function() {
+			if($(this).data('dragging')) {
+				return;
+			}
+			
 			$(this).toggleClass('strike');
 		});
 

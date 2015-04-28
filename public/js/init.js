@@ -16,7 +16,18 @@ $(function() {
 	$(".gridster > ul").gridster({
 		widget_margins: [5, 6],
 		widget_base_dimensions: [230, 60],
-		max_cols: 6
+		max_cols: 6,
+		draggable: {
+			start: function(e, ui, widget) {
+				$(e.toElement).data('dragging', true);
+			},
+
+			stop: function(e, ui, widget) {
+				window.setTimeout(function() {
+					$(e.toElement).data('dragging', false);
+				}, 1);
+			}
+		}
 	}).data('gridster');
 
 	RANGE_INBOUND = $("#rangeIn")[0].value;
