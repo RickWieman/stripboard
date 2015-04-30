@@ -33,7 +33,7 @@ function createStrip(flight) {
 				return;
 			}
 			
-			openDialogOutbound(flight.callsign);
+			openDialog(flight.callsign, TAKEOFF_RUNWAYS);
 		});
 	}
 	else if(flight.destination == AIRPORT && flight.distanceToAirport < RANGE_INBOUND) {
@@ -63,7 +63,7 @@ function createStrip(flight) {
 				return;
 			}
 
-			openDialogInbound(flight.callsign);
+			openDialog(flight.callsign, LANDING_RUNWAYS);
 		});
 	}
 
@@ -139,6 +139,13 @@ function updateStrip(flight) {
 		else {
 			runway = RUNWAY_INBOUND;
 		}
+	}
+
+	if($("#" + flight.callsign).data('touchgo')) {
+		$("#" + flight.callsign).addClass('touchgo');
+	}
+	else {
+		$("#" + flight.callsign).removeClass('touchgo');
 	}
 
 	$("#" + flight.callsign + " .aircraft").html(flight.aircraft);

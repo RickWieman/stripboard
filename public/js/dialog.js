@@ -1,16 +1,8 @@
 var dialog, DIALOG_FLIGHT;
 
-function openDialogInbound(flight) {
-	addRunwaysToDialog(flight, RUNWAY_INBOUND, LANDING_RUNWAYS);
-	openDialog(flight);	
-}
+function openDialog(flight, runwayList) {
+	DIALOG_FLIGHT = flight;
 
-function openDialogOutbound(flight) {
-	addRunwaysToDialog(flight, RUNWAY_OUTBOUND, TAKEOFF_RUNWAYS);
-	openDialog(flight);	
-}
-
-function addRunwaysToDialog(flight, preselect, list) {
 	$("#dialog-runway").empty();
 
 	var dialogSelected = $("#" + flight).data('forced-runway');
@@ -18,37 +10,52 @@ function addRunwaysToDialog(flight, preselect, list) {
 		$("input[name='runway'][value='default']").click();
 	}
 
-	$.each(list, function(id, runway) {
+	var touchgoSelected = $("#" + flight).data('touchgo');
+	if(touchgoSelected) {
+		$("input[name='touchgo']").click();
+	}
+
+	$.each(runwayList, function(id, runway) {
 		var selected = (runway == dialogSelected) ? ' checked="checked"' : '';
 
 		$("#dialog-runway").append('<label><input type="radio" name="runway" value="'+runway+'"'+selected+' />'+runway+'</label>');
 	});
-}
-
-function openDialog(flight) {
-	DIALOG_FLIGHT = flight;
 
 	dialog.dialog("open");
+}
+
+function dialogUpdateStrip() {
+	var runway = $("input[name='runway']:checked").val();
+				
+	if(runway == 'default') {
+		$("#" + DIALOG_FLIGHT).removeData('forced-runway');
+	}
+	else {
+		$("#" + DIALOG_FLIGHT).data('forced-runway', runway);
+	}
+
+	var touchgo = $("input[name='touchgo']:checked").val();
+
+	if(touchgo == 'true') {
+		$("#" + DIALOG_FLIGHT).data('touchgo', true);
+	}
+	else {
+		$("#" + DIALOG_FLIGHT).removeData('touchgo');
+	}
+
+	updateData();
 }
 
 $(function() {
 	dialog = $("#dialog-form").dialog({
 		autoOpen: false,
-		height: 200,
+		height: 250,
 		width: 500,
 		modal: true,
 		buttons: {
 			Update: function() {
-				var value = $("input[name='runway']:checked").val();
+				dialogUpdateStrip();
 
-				if(value == 'default') {
-					$("#" + DIALOG_FLIGHT).removeData('forced-runway');
-				}
-				else {
-					$("#" + DIALOG_FLIGHT).data('forced-runway', value);
-				}
-
-				updateData();
 				dialog.dialog("close");
 			},
 			Cancel: function() {

@@ -29,6 +29,10 @@ h1 {
 		width: 30px;
 	}
 
+#dialog-runway {
+	margin: 10px 0px;
+}
+
 .gridster input, .gridster textarea {
 	color: #cc0080;
 	font-family: sans-serif;
@@ -74,6 +78,10 @@ h1 {
 		font-size: 1.5em;
 		font-weight: bold;
 		color: #c00;
+	}
+
+	.gridster li.touchgo {
+		border-color: #c00 !important;
 	}
 
 .gridster .gs-w {
