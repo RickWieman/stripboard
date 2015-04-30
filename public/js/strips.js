@@ -27,6 +27,14 @@ function createStrip(flight) {
 
 			$(this).toggleClass('check');
 		});
+
+		$("#" + flight.callsign + " div.runway").on("click", function() {
+			if($(this).data('dragging')) {
+				return;
+			}
+			
+			openDialogOutbound(flight.callsign);
+		});
 	}
 	else if(flight.destination == AIRPORT && flight.distanceToAirport < RANGE_INBOUND) {
 		createStripInbound(flight);
@@ -48,6 +56,14 @@ function createStrip(flight) {
 			else {
 				element.toggleClass('initial');
 			}
+		});
+
+		$("#" + flight.callsign + " div.runway").on("click", function() {
+			if($(this).data('dragging')) {
+				return;
+			}
+
+			openDialogInbound(flight.callsign);
 		});
 	}
 
@@ -101,16 +117,28 @@ function updateStrip(flight) {
 	var runway;
 
 	if(flight.origin == AIRPORT) {
-		$("#" + flight.callsign + " .sid").html(createSID(RUNWAY_OUTBOUND, flight.route));
+		if($("#" + flight.callsign).data('forced-runway')) {
+			runway = $("#" + flight.callsign).data('forced-runway');
+		}
+		else {
+			runway = RUNWAY_OUTBOUND;
+		}
+
+		$("#" + flight.callsign + " .sid").html(createSID(runway, flight.route));
 
 		route = createOutboundRoute(flight.route);
-		runway = RUNWAY_OUTBOUND;
 	}
 	else if(flight.destination == AIRPORT) {
 		$("#" + flight.callsign + " .eobt").html(flight.eta);
 
 		route = createInboundRoute(flight.route);
-		runway = RUNWAY_INBOUND;
+		
+		if($("#" + flight.callsign).data('forced-runway')) {
+			runway = $("#" + flight.callsign).data('forced-runway');
+		}
+		else {
+			runway = RUNWAY_INBOUND;
+		}
 	}
 
 	$("#" + flight.callsign + " .aircraft").html(flight.aircraft);

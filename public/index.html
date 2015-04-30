@@ -3,19 +3,33 @@
 	<head>
 		<title>Flight Progress Strips</title>
 		<script type="text/javascript" src="vendor/jquery-2.1.3.min.js"></script>
+		<script type="text/javascript" src="vendor/jquery-ui-1.11.4.min.js"></script>
 		<script type="text/javascript" src="vendor/jquery.gridster.min.js"></script>
 		<script type="text/javascript" src="vendor/papaparse.min.js"></script>
 		<script type="text/javascript" src="js/constants.js"></script>
 		<script type="text/javascript" src="js/data.js"></script>
 		<script type="text/javascript" src="js/strips.js"></script>
 		<script type="text/javascript" src="js/init.js"></script>
+		<script type="text/javascript" src="js/dialog.js"></script>
+		<link rel="stylesheet" type="text/css" href="vendor/jquery-ui-1.11.4.min.css">
 		<link rel="stylesheet" type="text/css" href="vendor/jquery.gridster.min.css">
 		<link rel="stylesheet" type="text/css" href="css/board.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_inbound.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_outbound.css">
 		<link rel="stylesheet" type="text/css" href="css/strip_occupied.css">
+
 	</head>
 	<body>
+		<div id="dialog-form" title="Change runway">			 
+			<p>Manually choose a runway for flight <span id="dialog-flight"></span>:</p>
+			<form>
+				<label><input type="radio" name="runway" value="default" />Use main runway</label>
+				<div id="dialog-runway"></div>
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			</form>
+		</div>
+
 		<div class="info"><h1>Flight Progress Strips Board</h1>
 		<p>Current airport: <span id="airport"></span></p>
 		<p><a href='javascript:updateData()'>Manual Update</a></p>
