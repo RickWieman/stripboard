@@ -90,5 +90,6 @@ h1 {
 
 .gridster .preview-holder {
 	border: none!important;
-	background: red!important;
+	box-shadow: none!important;
+	background: none!important;
 }

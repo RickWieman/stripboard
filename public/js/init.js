@@ -17,6 +17,9 @@ $(function() {
 		widget_margins: [5, 6],
 		widget_base_dimensions: [230, 60],
 		max_cols: 6,
+		collision: {
+			wait_for_mouseup: true
+		},
 		draggable: {
 			start: function(e, ui, widget) {
 				$(e.toElement).data('dragging', true);
