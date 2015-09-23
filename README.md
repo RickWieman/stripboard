@@ -3,6 +3,8 @@
 This tool allows you to manage VATSIM flight progress strips on a drag 'n drop strip board.
 It tries to do as much as possible on the client side (using JavaScript) to provide the best user experience possible.
 
+**Development is discontinued (at least for now).**
+
 ## Installation
 
 As this tool is a rather simple JavaScript based application, it should be able to run on almost any system.
