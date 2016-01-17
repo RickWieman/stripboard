@@ -18,7 +18,8 @@ $(function() {
 		widget_base_dimensions: [230, 60],
 		max_cols: 6,
 		collision: {
-			wait_for_mouseup: true
+			wait_for_mouseup: true,
+			always_move_down: true
 		},
 		draggable: {
 			start: function(e, ui, widget) {
