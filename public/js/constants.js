@@ -60,22 +60,22 @@ const SIDs = {
 	'18L': {
 		ANDIK: 'AND2E',
 		ARNEM: 'ARN3E',
-		BERGI: 'BER2E',
+		BERGI: 'BER3E',
 		EDUPO: 'LUN1E',
-		GORLO: 'VAL2E',
-		LEKKO: 'LEK2E',
-		LOPIK: 'LOP2E',
-		VALKO: 'VAL2E'
+		GORLO: 'VAL3E',
+		LEKKO: 'LEK3E',
+		LOPIK: 'LOP3E',
+		VALKO: 'VAL3E'
 	},
 	'18C': {
 		ANDIK: 'BET3Y',
 		ARNEM: 'ELP2X',
-		BERGI: 'AMG2X',
-		EDUPO: 'EDU1X',
-		GORLO: 'DEN2X',
+		BERGI: 'WIS1X',
+		EDUPO: 'EDU2X',
+		GORLO: 'DEN3X',
 		LEKKO: 'LAR1X',
-		LOPIK: 'ROV1X',
-		VALKO: 'DEN2X'
+		LOPIK: 'ROV2X',
+		VALKO: 'DEN3X'
 	},
 	'22': {
 		ANDIK: 'AND2G',
@@ -94,7 +94,7 @@ const SIDs = {
 		EDUPO: 'LUN1S',
 		GORLO: 'VAL1S',
 		LEKKO: 'LEK1S',
-		LOPIK: 'LOP1S',
+		LOPIK: 'LOP2S',
 		VALKO: 'VAL1S'
 	},
 	'27': {
@@ -113,8 +113,8 @@ const SIDs = {
 		BERGI: 'BER3V',
 		EDUPO: 'LUN1V',
 		GORLO: 'GOR3V',
-		LEKKO: 'LEK2V',
-		LOPIK: 'LOP2V',
+		LEKKO: 'LEK3V',
+		LOPIK: 'LOP3V',
 		VALKO: 'GOR3V'
 	},
 	'36C': {
@@ -124,7 +124,7 @@ const SIDs = {
 		EDUPO: 'IVL2W',
 		GORLO: 'DIFT',
 		LEKKO: 'WOO1W',
-		LOPIK: 'OGI1W',
+		LOPIK: 'OGI2W',
 		VALKO: 'DIFT'
 	}
 }
